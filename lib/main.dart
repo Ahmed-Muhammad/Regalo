@@ -6,7 +6,7 @@ import 'src/core/bloc_observer/bloc_observer.dart';
 import 'src/features/splash_screen/screens/splash_screen.dart';
 
 void main() {
-  //Bloc Observer
+  //Bloc Observer.
   BlocOverrides.runZoned(
     () => runApp(const MercadoApp()),
     blocObserver: MyBlocObserver(),
