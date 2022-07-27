@@ -1,9 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mercado/src/core/themes/app_theme.dart';
 
 import 'src/core/bloc_observer/bloc_observer.dart';
+import 'src/features/splash_screen/controller/cubit/splash_screen_cubit.dart';
 import 'src/features/splash_screen/screens/splash_screen.dart';
 
 void main() {
@@ -24,14 +25,19 @@ class MercadoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-      theme: appTheme,
-      home: const Scaffold(
-        body: SplashScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SplashScreenCubit(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        useInheritedMediaQuery: true,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        theme: appTheme,
+        home: const SplashScreen(),
       ),
     );
   }
