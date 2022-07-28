@@ -5,6 +5,7 @@ import '../../screens/account_page.dart';
 import '../../screens/cart_page.dart';
 import '../../screens/home_page.dart';
 import '../../screens/notification_page.dart';
+import '../../screens/product_page.dart';
 import 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
@@ -15,7 +16,7 @@ class MainCubit extends Cubit<MainState> {
   int currentIndex = 0;
 
   List<Widget> bottomScreens = [
-    const HomePage(),
+    const ProductPage(),
     const CartPage(),
     const AccountPage(),
     const NotificationPage(),

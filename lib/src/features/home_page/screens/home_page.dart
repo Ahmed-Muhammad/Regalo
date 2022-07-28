@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercado/src/features/home_page/controller/bloc/main_cubit.dart';
 
 import '../controller/bloc/main_state.dart';
-import '../widgets/home_page_body.dart';
+import '../widgets/cart_page_body.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          body: const CartBody(),
+          body: homeCubit.bottomScreens[homeCubit.currentIndex],
         );
       },
     );
