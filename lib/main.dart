@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mercado/src/features/home_page/screens/home_page.dart';
+import 'package:mercado/src/features/splash_screen/screens/splash_screen.dart';
 
 import 'src/core/bloc_observer/bloc_observer.dart';
 import 'src/core/themes/app_theme.dart';

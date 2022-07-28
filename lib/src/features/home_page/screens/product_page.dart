@@ -17,9 +17,7 @@ class ProductPage extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var mainCubit = MainCubit.get(context);
-        return Scaffold(
-          drawer: Drawer(),
-          appBar: AppBar(),
+        return const Scaffold(
           body: ProductBody(),
         );
       },

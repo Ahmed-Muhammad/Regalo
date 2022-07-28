@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercado/src/features/home_page/controller/bloc/main_cubit.dart';
 
+import '../../drawer/screens/drawer.dart';
 import '../controller/bloc/main_state.dart';
 import '../widgets/cart_page_body.dart';
 
@@ -16,6 +17,8 @@ class HomePage extends StatelessWidget {
       builder: (context, state) {
         var homeCubit = MainCubit.get(context);
         return Scaffold(
+          drawer: homeCubit.currentIndex == 0 ? const MyDrawer() : null,
+          appBar: AppBar(),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: homeCubit.currentIndex,
             onTap: (index) {
