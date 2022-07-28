@@ -1,11 +1,13 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mercado/src/core/themes/app_theme.dart';
 
 import 'src/core/bloc_observer/bloc_observer.dart';
-import 'src/features/splash_screen/controller/cubit/splash_screen_cubit.dart';
-import 'src/features/splash_screen/screens/splash_screen.dart';
+import 'src/core/themes/app_theme.dart';
+import 'src/features/home_page/controller/bloc/main_cubit.dart';
+import 'src/features/login_page/controller/cubit/login_cubit.dart';
+import 'src/features/login_page/screens/login_page.dart';
+import 'src/features/register_page/controller/cubit/register_cubit.dart';
 
 void main() {
   //Bloc Observer
@@ -28,8 +30,13 @@ class MercadoApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SplashScreenCubit(),
-        )
+          create: (context) => LoginCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RegisterCubit(),
+        ), BlocProvider(
+          create: (context) => MainCubit(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -37,7 +44,7 @@ class MercadoApp extends StatelessWidget {
         locale: DevicePreview.locale(context),
         builder: DevicePreview.appBuilder,
         theme: appTheme,
-        home: const SplashScreen(),
+        home: const LoginPage(),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mercado/src/core/constants/constants.dart';
 //--------------Navigator To Page -----------------------
 
 void navigateTo(context, int durationInSec, {required pageName}) {
@@ -13,7 +14,9 @@ void navigateTo(context, int durationInSec, {required pageName}) {
       );
     },
   );
+}
 
+void navigateToPage(context, {required pageName}) {
   Navigator.push(
     context,
     MaterialPageRoute(
@@ -33,6 +36,15 @@ void navigateAndFinish(context, int durationInSec, {required pageName}) {
         ),
       );
     },
+  );
+}
+
+void navigateToPageAndFinish(context, {required pageName}) {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => pageName,
+    ),
   );
 }
 
@@ -88,20 +100,26 @@ Widget buildArticleItem(article, context) => Padding(
       ),
     );
 
-Widget defaultFormField(
-    {required TextEditingController controller,
-    TextInputType? type,
-    Function(String)? onSubmit,
-    Function(String)? onChanged,
-    GestureTapCallback? onTap,
-    String? Function(String?)? validate,
-    required String? label,
-    required IconData? prefix,
-    bool isClickable = true,
-    IconData? suffix,
-    void Function()? suffixPressed,
-    bool obscureText = false}) {
+Widget defaultFormField({
+  required TextEditingController controller,
+  TextInputType? type,
+  Function(String)? onSubmit,
+  Function(String)? onChanged,
+  double? prefixIconSize,
+  double? suffixIconSize,
+  int maxLength = 50,
+  GestureTapCallback? onTap,
+  String? Function(String?)? validate,
+  required String? label,
+  required IconData? prefix,
+  bool isClickable = true,
+  IconData? suffix,
+  void Function()? suffixPressed,
+  bool obscureText = false,
+
+}) {
   return TextFormField(
+    maxLength: maxLength,
     obscureText: obscureText,
     enabled: isClickable,
     controller: controller,
@@ -111,11 +129,20 @@ Widget defaultFormField(
     onTap: onTap,
     validator: validate,
     decoration: InputDecoration(
+      counterText: "",
       labelText: label,
-      prefixIcon: Icon(prefix),
+      prefixIcon: Icon(
+        prefix,
+        size: prefixIconSize,
+        color: primaryColor,
+      ),
       suffixIcon: IconButton(
         onPressed: suffixPressed,
-        icon: Icon(suffix),
+        icon: Icon(
+          suffix,
+          size: suffixIconSize,
+          color: primaryColor,
+        ),
       ),
       border: const OutlineInputBorder(),
     ),
@@ -124,22 +151,23 @@ Widget defaultFormField(
 
 Widget defaultTextButton({
   required String text,
+  bool isUpperCase = true,
   required void Function()? function,
 }) =>
-    TextButton(onPressed: function, child: Text(text.toUpperCase()));
+    TextButton(onPressed: function, child: Text(isUpperCase ? text.toUpperCase() : text));
 
 Widget defaultButton({
-  double width = double.infinity,
-  Color background = Colors.blue,
+  double? width,
+  double? height,
   bool isUpperCase = true,
-  double radius = 3.0,
+  double radius = 50.0,
   required void Function() function,
   required String text,
 }) {
   return Container(
     width: width,
-    height: 50.0,
-    decoration: BoxDecoration(borderRadius: BorderRadius.circular(radius), color: background),
+    height: height,
+    decoration: BoxDecoration(borderRadius: BorderRadius.circular(radius), color: primaryColor),
     child: MaterialButton(
       onPressed: function,
       child: Text(
