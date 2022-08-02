@@ -151,16 +151,19 @@ Widget defaultFormField({
 
 Widget defaultTextButton({
   required String text,
+  double? fontSize,
   bool isUpperCase = true,
   required void Function()? function,
 }) =>
-    TextButton(onPressed: function, child: Text(isUpperCase ? text.toUpperCase() : text));
+    TextButton(onPressed: function, child: Text(isUpperCase ? text.toUpperCase() : text , style:
+    TextStyle(fontSize: fontSize),));
 
 Widget defaultButton({
   double? width,
   double? height,
   bool isUpperCase = true,
   double radius = 50.0,
+  double? fontSize,
   required void Function() function,
   required String text,
 }) {
@@ -172,7 +175,7 @@ Widget defaultButton({
       onPressed: function,
       child: Text(
         isUpperCase ? text.toUpperCase() : text,
-        style: const TextStyle(color: Colors.white),
+        style:  TextStyle(color: Colors.white , fontSize: fontSize ),
       ),
     ),
   );

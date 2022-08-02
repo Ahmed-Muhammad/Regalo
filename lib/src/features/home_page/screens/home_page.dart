@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercado/src/features/home_page/controller/bloc/main_cubit.dart';
 
+import '../../../core/shared/components.dart';
 import '../../drawer/screens/drawer.dart';
+import '../../search_screen/screens/search_page.dart';
+import '../../search_screen/widgets/search_body.dart';
 import '../controller/bloc/main_state.dart';
-import '../widgets/cart_page_body.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,7 +20,6 @@ class HomePage extends StatelessWidget {
         var homeCubit = MainCubit.get(context);
         return Scaffold(
           drawer: homeCubit.currentIndex == 0 ? const MyDrawer() : null,
-          appBar: AppBar(),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: homeCubit.currentIndex,
             onTap: (index) {
@@ -40,6 +41,22 @@ class HomePage extends StatelessWidget {
               BottomNavigationBarItem(
                 icon: Icon(FontAwesomeIcons.bell),
                 label: 'Notification',
+              ),
+            ],
+          ),
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () {
+                  showSearch(
+                    context: context,
+                    delegate: CustomSearchDelegate(),
+                  );
+                },
+                icon: const Icon(
+                  FontAwesomeIcons.search,
+                  size: 18,
+                ),
               ),
             ],
           ),

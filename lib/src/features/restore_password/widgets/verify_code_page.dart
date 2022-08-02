@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mercado/src/core/constants/constants.dart';
-import 'package:mercado/src/features/restore_password/widgets/change_password.dart';
 
+import '../../../core/constants/constants.dart';
 import '../../../core/shared/components.dart';
-import '../controller/bloc/restore_password_cubit.dart';
-import '../controller/bloc/restore_password_state.dart';
-import 'verify_code_page.dart';
+import 'change_password.dart';
 
-class RestorePasswordBody extends StatelessWidget {
-  RestorePasswordBody({Key? key}) : super(key: key);
-
-  TextEditingController phoneController = TextEditingController();
+class VerifyCodePage extends StatelessWidget {
+  VerifyCodePage({Key? key}) : super(key: key);
+  TextEditingController restoreVerifyCodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<RestorePasswordCubit, RestorePasswordState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        RestorePasswordCubit restorePasswordCubit = RestorePasswordCubit.get(context);
-        return SafeArea(
+    return MaterialApp(
+      home: Scaffold(
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -30,10 +23,9 @@ class RestorePasswordBody extends StatelessWidget {
                   const SizedBox(height: 20),
                   // Logo
                   Image.asset('assets/images/login.png'),
-                  const SizedBox(height: 20), //Username Form Field
+                  //Username Form Field
                   const Text(
-                    'Please enter your phone number below. '
-                    'A Six digit code will be sent to your phone to restore your password.',
+                    'Please enter the code sent to you.',
                     style: TextStyle(
                         color: primaryColor,
                         fontWeight: FontWeight.bold,
@@ -42,13 +34,14 @@ class RestorePasswordBody extends StatelessWidget {
                   ),
                   const SizedBox(height: 25), //Username Form Field
                   defaultFormField(
-                    controller: phoneController,
-                    type: TextInputType.phone,
-                    maxLength: 11,
-                    label: 'Phone',
+                    controller: restoreVerifyCodeController,
+                    type: TextInputType.number,
+                    maxLength: 6,
+                    label: 'Code',
                     prefix: FontAwesomeIcons.phone,
                     prefixIconSize: 15,
                   ),
+
                   const SizedBox(height: 25),
                   //Password Form Field
 
@@ -62,10 +55,7 @@ class RestorePasswordBody extends StatelessWidget {
                         width: 150,
                         height: 40,
                         function: () {
-                          restorePasswordCubit.sendCodeToPhoneByLocalNotification(
-                              phone: phoneController.text);
-                          print( phoneController.text);
-                          navigateToPage(context, pageName: VerifyCodePage());
+                          navigateToPage(context, pageName: ChangePasswordPage());
                         },
                       ),
                     ],
@@ -75,8 +65,8 @@ class RestorePasswordBody extends StatelessWidget {
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

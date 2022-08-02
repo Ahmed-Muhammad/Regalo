@@ -1,9 +1,12 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mercado/src/features/home_page/screens/home_page.dart';
 
 import '../../../core/constants/constants.dart';
+import '../../../core/notifications/local_notification.dart';
 import '../../../core/shared/components.dart';
 import '../../restore_password/screens/restore_password.dart';
 import '../../register_page/screens/register_page.dart';
@@ -17,104 +20,155 @@ class LoginBody extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController userNameController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return BlocConsumer<LoginCubit, LoginState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is LoginSuccessState) {
+          print('login successful');
+        }
+      },
       builder: (context, state) {
         var loginCubit = LoginCubit.get(context);
         return SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(height: height),
-                  // Logo
-                  Image.asset('assets/images/login.png'),
-                  SizedBox(height: height),
-                  //Username Form Field
-                  defaultFormField(
-                    controller: userNameController,
-                    label: 'Username',
-                    prefix: FontAwesomeIcons.user,
-                    prefixIconSize: 15,
-                  ),
-                  SizedBox(
-                    height: height,
-                  ),
-                  //Password Form Field
-                  defaultFormField(
-                    maxLength: 15,
-                    controller: passwordController,
-                    label: 'Password',
-                    prefix: FontAwesomeIcons.lock,
-                    prefixIconSize: 15,
-                    obscureText: loginCubit.obscureText,
-                    suffix: loginCubit.suffix,
-                    suffixIconSize: 15,
-                    suffixPressed: () => loginCubit.changePasswordVisibility(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      //Forget your password?
-                      TextButton(
-                        onPressed: () {
-                          navigateToPage(context, pageName: RestorePassword());
-                        },
-                        child: const Text('Forget your password?'),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: height,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      //'Sign in' Button
-                      defaultButton(
-                        function: () {},
-                        text: 'Sign in',
-                        width: 150,
-                        height: 40,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: height,
-                  ),
-                  //Skip login button
-                  defaultTextButton(
-                      text: 'Skip login',
-                      function: () {
-                        navigateToPageAndFinish(context, pageName: const HomePage());
+              padding: EdgeInsets.all(15.w),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: height),
+                    // Logo
+                    Image.asset('assets/images/login.png'),
+                    SizedBox(height: height),
+                    //Username Form Field
+                    defaultFormField(
+                      controller: userNameController,
+                      label: 'Username',
+                      prefix: FontAwesomeIcons.user,
+                      prefixIconSize: 10.sp,
+                      validate: (value) {
+                        if (value!.length < 0) {
+                          return 'Please enter your user name';
+                        }
+                        return null;
                       },
-                      isUpperCase: false),
-                  SizedBox(
-                    height: height,
-                  ),
-                  //Register button
-                  TextButton(
-                    onPressed: () {
-                      navigateToPage(context, pageName: const RegisterPage());
-                    },
-                    child: const Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Don\'t have account?  ',
-                            style: TextStyle(color: secondaryColor),
+                    ),
+                    SizedBox(
+                      height: height,
+                    ),
+                    //Password Form Field
+                    defaultFormField(
+                      maxLength: 15,
+                      validate: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                      onSubmit: (value) {
+                        if (formKey.currentState?.validate() == true) {
+                          loginCubit.userLogin(
+                            userName: userNameController.text,
+                            password: passwordController.text,
+                          );
+                        }
+                        return 'please check you user name or password';
+                      },
+                      controller: passwordController,
+                      label: 'Password',
+                      prefix: FontAwesomeIcons.lock,
+                      prefixIconSize: 10.sp,
+                      obscureText: loginCubit.obscureText,
+                      suffix: loginCubit.suffix,
+                      suffixIconSize: 10.sp,
+                      suffixPressed: () => loginCubit.changePasswordVisibility(),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        //Forget your password?
+                        TextButton(
+                          onPressed: () {
+                            navigateToPage(context, pageName: const RestorePassword());
+                          },
+                          child: Text(
+                            'Forget your password?',
+                            style: TextStyle(fontSize: 10.sp),
                           ),
-                          TextSpan(
-                            text: 'Register now',
-                            style: TextStyle(color: primaryColor),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: height,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                                       //'Sign in' Button
+                        ConditionalBuilder(
+                          condition: state is! LoginLoadingState,
+                          fallback: (context) {
+                            return const Center(
+                                child: CircularProgressIndicator(color: primaryColor));
+                          },
+                          builder: (context) => defaultButton(
+                            function: () {
+                              if (formKey.currentState!.validate() == true) {
+                                loginCubit.userLogin(
+                                    userName: userNameController.text,
+                                    password: passwordController.text);
+                              }
+                              print(userNameController.text);
+                              print(passwordController.text);
+
+                            },
+                            text: 'Sign in',
+                            fontSize: 14.sp,
+                            width: 140.w,
+                            height: 40.h,
                           ),
-                        ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: height,
+                    ),
+                    //Skip login button
+                    defaultTextButton(
+                        text: 'Skip login',
+                        fontSize: 12.sp,
+                        function: () {
+
+                          navigateToPageAndFinish(context, pageName: const HomePage());
+                        },
+                        isUpperCase: false),
+                    SizedBox(
+                      height: height,
+                    ),
+                    //Register button
+                    TextButton(
+                      onPressed: () {
+                        navigateToPage(context, pageName: const RegisterPage());
+                      },
+                      child: Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Don\'t have account?  ',
+                              style: TextStyle(color: secondaryColor, fontSize: 12.sp),
+                            ),
+                            TextSpan(
+                              text: 'Register now',
+                              style: TextStyle(color: primaryColor, fontSize: 12.sp),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

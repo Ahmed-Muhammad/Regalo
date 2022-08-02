@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/responsive/responsive.dart';
 import '../widgets/login_body.dart';
@@ -8,12 +9,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: ResponsiveLayout(
-        mobile: LoginBody(height: 30),
-        tablet: LoginBody(height: 50),
-        website: LoginBody(height: 90),
-      ),
+    return ScreenUtilInit(
+      builder: (context, child) {
+        return Scaffold(
+          body: LoginBody(height: 20.h),
+        );
+      },
+      designSize: const Size(360, 800),
     );
   }
 }

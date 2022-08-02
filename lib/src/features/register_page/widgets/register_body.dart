@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,7 +14,6 @@ class RegisterBody extends StatelessWidget {
 
   TextEditingController userNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
@@ -48,7 +48,6 @@ class RegisterBody extends StatelessWidget {
                     label: 'Phone',
                     prefix: FontAwesomeIcons.phone,
                     prefixIconSize: 15,
-
                   ),
                   const SizedBox(height: 15),
                   //Password Form Field
@@ -80,13 +79,27 @@ class RegisterBody extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       //Register Button
-                      defaultButton(
-                        isUpperCase: true,
-                        function: () {},
-                        text: 'Register',
-                        width: 150,
-                        height: 40,
-                      ),
+                      ConditionalBuilder(
+                          condition: state is! RegisterLoadingState,
+                          fallback: (context) => const Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                          builder: (context) {
+                            return defaultButton(
+                              isUpperCase: true,
+                              function: () {
+                                registerCubit.registerUser(
+                                  name: userNameController.text,
+                                  phone: phoneController.text,
+                                  password: passwordController.text,
+                                  // firebaseToken: '778541'
+                                );
+                              },
+                              text: 'Register',
+                              width: 150,
+                              height: 40,
+                            );
+                          }),
                     ],
                   ),
                   const SizedBox(height: 15),
