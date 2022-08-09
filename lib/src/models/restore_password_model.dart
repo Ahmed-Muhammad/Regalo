@@ -15,8 +15,8 @@ class SendCodeToPhone {
 class VerifyCode {
   VerifyCode({required this.message, required this.data});
 
-  bool? message;
-  String? data;
+  bool message;
+  String data;
 
   factory VerifyCode.fromJson(Map<dynamic, dynamic> json) {
     return VerifyCode(
@@ -29,8 +29,8 @@ class VerifyCode {
 class ChangePassword {
   ChangePassword({required this.message, required this.data});
 
-  bool? message;
-  String? data;
+  bool message;
+  String data;
 
   factory ChangePassword.fromJson(Map<dynamic, dynamic> json) {
     return ChangePassword(

@@ -63,9 +63,9 @@ class RestorePasswordBody extends StatelessWidget {
                         height: 40,
                         function: () {
                           restorePasswordCubit.sendCodeToPhoneByLocalNotification(
-                              phone: phoneController.text);
-                          print( phoneController.text);
-                          navigateToPage(context, pageName: VerifyCodePage());
+                            phone: phoneController.text,
+                            navigate: true,
+                          );
                         },
                       ),
                     ],
