@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mercado/src/core/shared/get_device_type.dart';
 
 import '../models/device_info.dart';
 
@@ -14,7 +13,7 @@ class InfoWidget extends StatelessWidget {
         var mediaQueryData = MediaQuery.of(context);
         var deviceInfo = DeviceInfo(
           orientation: mediaQueryData.orientation,
-          deviceType: getDeviceType(mediaQueryData),
+          // deviceType: getDeviceType(mediaQueryData),
           screenHeight: mediaQueryData.size.height,
           screenWidth: mediaQueryData.size.width,
           localHeight: constraints.maxHeight,

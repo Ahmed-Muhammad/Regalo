@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mercado/src/core/constants/constants.dart';
+import 'package:regalo/src/core/constants/constants.dart';
 //--------------Navigator To Page -----------------------
 
 void navigateTo(context, int durationInSec, {required pageName}) {

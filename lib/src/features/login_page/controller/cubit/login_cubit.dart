@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mercado/src/core/api/end_points.dart';
+import 'package:regalo/src/core/api/end_points.dart';
 
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:mercado/src/models/login_model.dart';
+import 'package:regalo/src/models/login_model.dart';
+import 'package:regalo/src/models/products_model.dart';
 
 import '../../../../core/api/dio_helper.dart';
 import '../../../../models/login_model.dart';
@@ -39,7 +40,7 @@ class LoginCubit extends Cubit<LoginState> {
   void userLogin({required String userName, required String password}) {
     emit(LoginLoadingState());
     DioHelper.postData(
-      url:'login', //end point
+      url: 'login', //end point
       data: {
         'name': userName,
         'password': password,
@@ -53,6 +54,7 @@ class LoginCubit extends Cubit<LoginState> {
       print('error in Login  =======> , ${error.toString()}');
     });
   }
+
 
 // login({
 //   required String userName,

@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mercado/src/features/login_page/screens/login_page.dart';
+import 'package:regalo/src/features/login_page/screens/login_page.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/shared/components.dart';
@@ -36,7 +36,7 @@ class RegisterBody extends StatelessWidget {
                   const SizedBox(height: 15), //Username Form Field
                   defaultFormField(
                     controller: userNameController,
-                    label: 'Username',
+                    label: 'اسم المستخدم',
                     prefix: FontAwesomeIcons.user,
                     prefixIconSize: 15,
                   ),
@@ -45,7 +45,7 @@ class RegisterBody extends StatelessWidget {
                     maxLength: 11,
                     controller: phoneController,
                     type: TextInputType.phone,
-                    label: 'Phone',
+                    label: 'رقم الهاتف',
                     prefix: FontAwesomeIcons.phone,
                     prefixIconSize: 15,
                   ),
@@ -54,7 +54,7 @@ class RegisterBody extends StatelessWidget {
                   defaultFormField(
                     maxLength: 15,
                     controller: passwordController,
-                    label: 'Password',
+                    label: 'كلمه المرور',
                     prefix: FontAwesomeIcons.lock,
                     prefixIconSize: 15,
                     obscureText: registerCubit.obscureText,
@@ -66,7 +66,7 @@ class RegisterBody extends StatelessWidget {
                   defaultFormField(
                     maxLength: 15,
                     controller: confirmPasswordController,
-                    label: 'Confirm Password',
+                    label: 'تأكيد كلمه المرور',
                     prefix: FontAwesomeIcons.lock,
                     prefixIconSize: 15,
                     obscureText: registerCubit.obscureTextConfirm,
@@ -95,7 +95,7 @@ class RegisterBody extends StatelessWidget {
                                   // firebaseToken: '778541'
                                 );
                               },
-                              text: 'Register',
+                              text: 'انشاء حساب',
                               width: 150,
                               height: 40,
                             );
@@ -111,11 +111,11 @@ class RegisterBody extends StatelessWidget {
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: 'Have account?  ',
+                            text: 'لديك حساب؟  ',
                             style: TextStyle(color: secondaryColor),
                           ),
                           TextSpan(
-                            text: 'Login instead',
+                            text: 'تسجيل الدخول',
                             style: TextStyle(color: primaryColor),
                           ),
                         ],

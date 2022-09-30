@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mercado/src/core/shared/components.dart';
-import 'package:mercado/src/features/login_page/screens/login_page.dart';
+import 'package:regalo/src/core/shared/components.dart';
+import 'package:regalo/src/features/login_page/screens/login_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -46,27 +46,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              Image.asset('assets/images/splash.png'),
-              const Spacer(),
               FadeTransition(
                 opacity: fadingAnimation!,
-                child: Text.rich(TextSpan(
-                    text: 'M ',
-                    style: GoogleFonts.alegreya(
-                      color: const Color.fromRGBO(196, 228, 57, 100),
-                      fontSize: 70,
-                      fontWeight: FontWeight.w900,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: 'e r c a d o',
-                        style: GoogleFonts.alegreya(
-                          color: Colors.black,
-                          fontSize: 50,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ])),
+                child: Image.asset('assets/images/splash.png'),
               ),
               const Spacer(),
             ],

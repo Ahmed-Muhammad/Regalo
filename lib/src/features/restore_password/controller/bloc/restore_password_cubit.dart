@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mercado/src/core/api/dio_helper.dart';
-import 'package:mercado/src/core/shared/components.dart';
-import 'package:mercado/src/features/restore_password/widgets/change_password.dart';
+import 'package:regalo/src/core/api/dio_helper.dart';
+import 'package:regalo/src/core/shared/components.dart';
+import 'package:regalo/src/features/restore_password/widgets/change_password.dart';
 
 import '../../../../core/notifications/local_notification.dart';
 import '../../../../models/restore_password_model.dart';
@@ -24,7 +24,7 @@ class RestorePasswordCubit extends Cubit<RestorePasswordState> {
         SendCodeToPhone sentCode = SendCodeToPhone.fromJson(value?.data);
         LocalNotification.showNotification(
           body: sentCode.data.toString(),
-          title: 'Mercado Verification Code',
+          title: 'regalo Verification Code',
         );
         print(value?.data);
         print(sentCode.data.toString());

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mercado/src/core/api/dio_helper.dart';
-import 'package:mercado/src/models/register_model.dart';
+import 'package:regalo/src/core/api/dio_helper.dart';
+import 'package:regalo/src/models/register_model.dart';
 
 import 'register_state.dart';
 

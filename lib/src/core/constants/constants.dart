@@ -4,6 +4,6 @@ const tabletWidth = 800;
 
 const websiteWidth = 1200;
 
-const primaryColor = Color(0xff082659);
+const primaryColor = Color(0xFFB47A21);
 
-const secondaryColor = Colors.cyan;
+const secondaryColor = Color(0xFF161617);

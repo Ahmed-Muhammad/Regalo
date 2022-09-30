@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mercado/src/core/constants/constants.dart';
-import 'package:mercado/src/features/restore_password/widgets/change_password.dart';
+import 'package:regalo/src/core/constants/constants.dart';
+import 'package:regalo/src/features/restore_password/widgets/change_password.dart';
 
 import '../../../core/shared/components.dart';
 import '../controller/bloc/restore_password_cubit.dart';

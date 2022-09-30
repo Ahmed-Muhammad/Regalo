@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mercado/src/features/home_page/screens/home_page.dart';
+import 'package:regalo/src/features/home_page/screens/home_page.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/notifications/local_notification.dart';
@@ -45,12 +45,12 @@ class LoginBody extends StatelessWidget {
                     //Username Form Field
                     defaultFormField(
                       controller: userNameController,
-                      label: 'Username',
+                      label: 'اسم المستخدم',
                       prefix: FontAwesomeIcons.user,
                       prefixIconSize: 10.sp,
                       validate: (value) {
                         if (value!.length < 0) {
-                          return 'Please enter your user name';
+                          return 'من فضلك ادخل اسم حسابك';
                         }
                         return null;
                       },
@@ -63,7 +63,7 @@ class LoginBody extends StatelessWidget {
                       maxLength: 15,
                       validate: (value) {
                         if (value!.isEmpty) {
-                          return 'Please enter your password';
+                          return 'من فضلك ادخل كلمه المرور';
                         }
                         return null;
                       },
@@ -74,10 +74,10 @@ class LoginBody extends StatelessWidget {
                             password: passwordController.text,
                           );
                         }
-                        return 'please check you user name or password';
+                        return 'خطأ في كلمه المرور او اسم الحساب';
                       },
                       controller: passwordController,
-                      label: 'Password',
+                      label: 'كلمه المرور',
                       prefix: FontAwesomeIcons.lock,
                       prefixIconSize: 10.sp,
                       obscureText: loginCubit.obscureText,
@@ -94,7 +94,7 @@ class LoginBody extends StatelessWidget {
                             navigateToPage(context, pageName: const RestorePassword());
                           },
                           child: Text(
-                            'Forget your password?',
+                            'نسيت كلمه المرور؟',
                             style: TextStyle(fontSize: 10.sp),
                           ),
                         ),
@@ -124,7 +124,7 @@ class LoginBody extends StatelessWidget {
                               print(passwordController.text);
 
                             },
-                            text: 'Sign in',
+                            text: 'تسجيل الدخول',
                             fontSize: 14.sp,
                             width: 140.w,
                             height: 40.h,
@@ -137,7 +137,7 @@ class LoginBody extends StatelessWidget {
                     ),
                     //Skip login button
                     defaultTextButton(
-                        text: 'Skip login',
+                        text: 'تخطي الدخول',
                         fontSize: 12.sp,
                         function: () {
 
@@ -156,11 +156,11 @@ class LoginBody extends StatelessWidget {
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: 'Don\'t have account?  ',
+                              text: 'ليس لديك حساب؟  ',
                               style: TextStyle(color: secondaryColor, fontSize: 12.sp),
                             ),
                             TextSpan(
-                              text: 'Register now',
+                              text: 'انشاء حساب',
                               style: TextStyle(color: primaryColor, fontSize: 12.sp),
                             ),
                           ],

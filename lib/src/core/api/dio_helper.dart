@@ -36,16 +36,12 @@ class DioHelper {
   static Future<Response> getData({
     required String url,
     Map<String, dynamic>? query,
-    String? lang = 'en',
-    String? token,
   }) async {
     //لما اعوز احط headers
     //وبيلغوا اللي متعرفين فوق في dio
 
     dio!.options.headers = {
-      'lang': lang,
       'Content-Type': 'application/json',
-      'Authorization': token ?? '',
     };
     return await dio!.get(
       url,

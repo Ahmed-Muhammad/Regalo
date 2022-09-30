@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../constants/constants.dart';
 
 final appTheme = ThemeData(
+    fontFamily: 'NotoKufiArabic',
+
     appBarTheme: const AppBarTheme(
       backgroundColor: primaryColor,
       centerTitle: true,
